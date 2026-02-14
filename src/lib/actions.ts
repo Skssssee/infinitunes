@@ -92,7 +92,9 @@ export async function createNewPlaylist(
     throw new Error("Failed to create playlist, please try again");
   }
 
-  revalidateTag("user_playlists");
+  // FIX: Next.js 16 requires a second argument for revalidateTag. 
+  // { expire: 0 } ensures immediate revalidation.
+  revalidateTag("user_playlists", { expire: 0 });
 
   return playlist;
 }
