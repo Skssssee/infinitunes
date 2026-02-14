@@ -22,9 +22,11 @@ const config: NextConfig = {
     unoptimized: !isDocker,
   },
   experimental: {
-    ppr: true,
-    reactCompiler: isProd ? true : undefined,
-    // ...
+    // ppr: true,             <-- REMOVED: Causing Build Failed (Error 1)
+    // reactCompiler: ...     <-- REMOVED: Unrecognized key (Warning)
+    
+    // If you specifically need the new PPR behavior mentioned in the error:
+    // cacheComponents: true, 
   },
   output: isDocker ? "standalone" : undefined,
   /* ... */
