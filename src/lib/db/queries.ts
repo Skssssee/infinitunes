@@ -41,7 +41,8 @@ export async function addSongsToPlaylist(playlistId: string, songs: string[]) {
     .where(eq(myPlaylists.id, playlistId))
     .returning();
 
-  revalidateTag("user_playlists");
+  // FIX 1: Updated revalidateTag
+  revalidateTag("user_playlists", { expire: 0 });
 
   return updatedPlaylist;
 }
@@ -82,7 +83,8 @@ export async function addToFavorites(
       throw new Error("Failed to add to favorites");
     }
 
-    revalidateTag("user_favorites");
+    // FIX 2: Updated revalidateTag
+    revalidateTag("user_favorites", { expire: 0 });
 
     return newFavorites;
   }
@@ -109,7 +111,8 @@ export async function addToFavorites(
     throw new Error("Failed to add to favorites");
   }
 
-  revalidateTag("user_favorites");
+  // FIX 3: Updated revalidateTag
+  revalidateTag("user_favorites", { expire: 0 });
 
   return updatedfavorites;
 }
@@ -147,7 +150,8 @@ export async function removeFromFavorites(
     throw new Error("Failed to remove from favorites");
   }
 
-  revalidateTag("user_favorites");
+  // FIX 4: Updated revalidateTag
+  revalidateTag("user_favorites", { expire: 0 });
 
   return updatedfavorites;
 }
